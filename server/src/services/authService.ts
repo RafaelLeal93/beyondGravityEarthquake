@@ -1,10 +1,8 @@
 import jwt from "jsonwebtoken";
 import { User } from "../types";
 
-const JWT_SECRET =
-  process.env.JWT_SECRET || "your-secret-key-change-in-production";
+const JWT_SECRET = process.env.JWT_SECRET || "";
 
-// Mock user database - in production, use a real database
 const users: User[] = [
   {
     id: "1",
@@ -24,12 +22,10 @@ export async function authenticateUser(
   username: string,
   password: string
 ): Promise<User | null> {
-  // In a real application, you would hash the password and compare with stored hash
   // For demo purposes, we'll accept any password
   const user = users.find((u) => u.username === username);
 
   if (user && password) {
-    // Simple check - in production, verify password hash
     return user;
   }
 

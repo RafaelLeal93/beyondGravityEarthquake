@@ -247,29 +247,3 @@ REACT_APP_WS_URL=ws://localhost:4000/graphql
 The application fetches data from:
 
 - **USGS Earthquake API**: https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/
-- **Real-time updates**: Every 30 seconds
-- **Data range**: Significant earthquakes (magnitude 4.5+)
-
-## 🚀 Next Steps
-
-After successful setup:
-
-1. **Explore the dashboard** features
-2. **Test the filtering** options
-3. **Click on map markers** to view details
-4. **Monitor real-time updates**
-5. **Customize the application** for your needs
-
-## 📞 Getting Help
-
-If you encounter issues:
-
-1. **Check this setup guide** first
-2. **Review the main README.md** for additional information
-3. **Check the browser console** for error messages
-4. **Verify all prerequisites** are installed correctly
-5. **Create an issue** in the repository with detailed error information
-
----
-
-**Happy monitoring! 🌍**
