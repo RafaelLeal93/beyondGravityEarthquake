@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import { EarthquakeData, Earthquake } from "../types";
 
 const USGS_API_BASE =
@@ -29,8 +28,6 @@ export async function fetchEarthquakeData(
 
     // Use significant earthquakes (magnitude 4.5+) for better data
     const url = `${USGS_API_BASE}/significant_month.geojson?${queryParams.toString()}`;
-
-    console.log("Fetching earthquake data from:", url);
 
     const response = await fetch(url);
 

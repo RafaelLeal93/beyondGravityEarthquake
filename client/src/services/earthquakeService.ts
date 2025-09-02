@@ -31,3 +31,71 @@ export const getMagnitudeSeverity = (
   if (magnitude >= 5) return "moderate";
   return "low";
 };
+
+// Transform function for testing purposes (matches server implementation)
+export const transformEarthquake = (feature: any) => {
+  const props = feature.properties;
+  const geom = feature.geometry;
+
+  return {
+    id: feature.id,
+    magnitude: props.mag || 0,
+    place: props.place || "Unknown location",
+    time: new Date(props.time).toISOString(),
+    updated: new Date(props.updated).toISOString(),
+    tz: props.tz,
+    url: props.url || "",
+    detail: props.detail || "",
+    felt: props.felt,
+    cdi: props.cdi,
+    mmi: props.mmi,
+    alert: props.alert,
+    status: props.status || "automatic",
+    tsunami: props.tsunami || 0,
+    sig: props.sig || 0,
+    net: props.net || "",
+    code: props.code || "",
+    ids: props.ids || "",
+    sources: props.sources || "",
+    types: props.types || "",
+    nst: props.nst,
+    dmin: props.dmin,
+    rms: props.rms,
+    gap: props.gap,
+    magType: props.magType || "unknown",
+    type: props.type || "earthquake",
+    title: props.title || "",
+    geometry: {
+      type: geom.type,
+      coordinates: geom.coordinates,
+    },
+    properties: {
+      mag: props.mag || 0,
+      place: props.place || "Unknown location",
+      time: new Date(props.time).toISOString(),
+      updated: new Date(props.updated).toISOString(),
+      tz: props.tz,
+      url: props.url || "",
+      detail: props.detail || "",
+      felt: props.felt,
+      cdi: props.cdi,
+      mmi: props.mmi,
+      alert: props.alert,
+      status: props.status || "automatic",
+      tsunami: props.tsunami || 0,
+      sig: props.sig || 0,
+      net: props.net || "",
+      code: props.code || "",
+      ids: props.ids || "",
+      sources: props.sources || "",
+      types: props.types || "",
+      nst: props.nst,
+      dmin: props.dmin,
+      rms: props.rms,
+      gap: props.gap,
+      magType: props.magType || "unknown",
+      type: props.type || "earthquake",
+      title: props.title || "",
+    },
+  };
+};

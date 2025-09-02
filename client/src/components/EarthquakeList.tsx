@@ -66,13 +66,10 @@ const EarthquakeList: React.FC<EarthquakeListProps> = ({
   }
 
   return (
-    <List dense sx={{ height: "100%", overflow: "auto" }}>
+    <List>
       {earthquakes.map((earthquake) => (
         <ListItem key={earthquake.id} disablePadding>
-          <ListItemButton
-            onClick={() => onEarthquakeSelect(earthquake)}
-            sx={{ py: 0.5 }}
-          >
+          <ListItemButton onClick={() => onEarthquakeSelect(earthquake)}>
             <ListItemText
               primary={
                 <Box display="flex" alignItems="center" gap={1}>
@@ -82,7 +79,7 @@ const EarthquakeList: React.FC<EarthquakeListProps> = ({
                     color={getMagnitudeColor(earthquake.magnitude)}
                     variant="outlined"
                   />
-                  <Typography variant="body2" noWrap sx={{ flexGrow: 1 }}>
+                  <Typography variant="body2" noWrap>
                     {earthquake.place}
                   </Typography>
                 </Box>

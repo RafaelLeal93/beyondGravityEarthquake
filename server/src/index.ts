@@ -10,6 +10,7 @@ import { WebSocketServer } from "ws";
 import { useServer } from "graphql-ws/lib/use/ws";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { PubSub } from "graphql-subscriptions";
+import { EarthquakeWebSocketServer } from "./websocket/earthquakeWS";
 
 const app = express();
 const httpServer = createServer(app);
@@ -41,6 +42,9 @@ const wsServer = new WebSocketServer({
 
 useServer({ schema }, wsServer);
 
+// Initialize custom WebSocket server for earthquake data
+const earthquakeWS = new EarthquakeWebSocketServer(httpServer);
+
 async function startServer() {
   await server.start();
 
@@ -61,8 +65,8 @@ async function startServer() {
   const PORT = process.env.PORT || 4000;
 
   httpServer.listen(PORT, () => {
-    console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
-    console.log(`🔌 WebSocket server ready at ws://localhost:${PORT}/graphql`);
+    console.log(` Server ready at http://localhost:${PORT}/graphql`);
+    console.log(` WebSocket server ready at ws://localhost:${PORT}/graphql`);
   });
 }
 

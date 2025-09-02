@@ -10,7 +10,7 @@ function AppContent() {
   const { isAuthenticated } = useAuth();
 
   return (
-    <Box sx={{ height: "100vh", overflow: "hidden" }}>
+    <Box>
       <Routes>
         <Route
           path="/login"

@@ -5,9 +5,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { Earthquake } from "../types";
 
 // You'll need to set your Mapbox access token
-const MAPBOX_TOKEN =
-  process.env.REACT_APP_MAPBOX_TOKEN ||
-  "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
+const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN || "";
 
 interface EarthquakeMapProps {
   earthquakes: Earthquake[];
@@ -38,7 +36,17 @@ const EarthquakeMap: React.FC<EarthquakeMapProps> = ({
 
     map.current.addControl(new mapboxgl.NavigationControl());
 
+    // Handle window resize
+    const handleResize = () => {
+      if (map.current) {
+        map.current.resize();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
     return () => {
+      window.removeEventListener("resize", handleResize);
       if (map.current) {
         map.current.remove();
       }
@@ -95,6 +103,13 @@ const EarthquakeMap: React.FC<EarthquakeMapProps> = ({
       });
       map.current.fitBounds(bounds, { padding: 50 });
     }
+
+    // Ensure map is properly sized after adding markers
+    setTimeout(() => {
+      if (map.current) {
+        map.current.resize();
+      }
+    }, 100);
   }, [earthquakes, onEarthquakeSelect]);
 
   useEffect(() => {
@@ -116,7 +131,7 @@ const EarthquakeMap: React.FC<EarthquakeMapProps> = ({
     return "#1976d2"; // Blue
   };
 
-  if (!MAPBOX_TOKEN || MAPBOX_TOKEN.includes("mapbox")) {
+  if (!MAPBOX_TOKEN || MAPBOX_TOKEN === "your_mapbox_access_token_here") {
     return (
       <Box
         display="flex"
@@ -133,7 +148,7 @@ const EarthquakeMap: React.FC<EarthquakeMapProps> = ({
           <br />
           Get your token at: https://account.mapbox.com/access-tokens/
         </Typography>
-        <Paper sx={{ p: 2, mt: 2, maxWidth: 400 }}>
+        <Paper>
           <Typography variant="body2">
             <strong>Demo Data:</strong> {earthquakes.length} earthquakes loaded
             <br />
@@ -148,10 +163,14 @@ const EarthquakeMap: React.FC<EarthquakeMapProps> = ({
   return (
     <Box
       ref={mapContainer}
+      height="100%"
+      width="100%"
       sx={{
-        width: "100%",
-        height: "100%",
-        borderRadius: 1,
+        minHeight: "400px",
+        "& .mapboxgl-canvas": {
+          width: "100% !important",
+          height: "100% !important",
+        },
       }}
     />
   );

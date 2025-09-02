@@ -43,25 +43,16 @@ const LoginPage: React.FC = () => {
         alignItems="center"
         minHeight="100vh"
       >
-        <Card sx={{ width: "100%", maxWidth: 400 }}>
-          <CardContent sx={{ p: 4 }}>
+        <Card>
+          <CardContent>
             <Typography variant="h4" component="h1" gutterBottom align="center">
               Earthquake Monitor
             </Typography>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              align="center"
-              sx={{ mb: 3 }}
-            >
+            <Typography variant="body2" color="text.secondary" align="center">
               Sign in to access the dashboard
             </Typography>
 
-            {error && (
-              <Alert severity="error" sx={{ mb: 2 }}>
-                {error}
-              </Alert>
-            )}
+            {error && <Alert severity="error">{error}</Alert>}
 
             <Box component="form" onSubmit={handleSubmit}>
               <TextField
@@ -86,14 +77,13 @@ const LoginPage: React.FC = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
                 disabled={loading}
               >
                 {loading ? "Signing in..." : "Sign In"}
               </Button>
             </Box>
 
-            <Box sx={{ mt: 2 }}>
+            <Box>
               <Typography variant="body2" color="text.secondary" align="center">
                 Demo credentials:
               </Typography>
